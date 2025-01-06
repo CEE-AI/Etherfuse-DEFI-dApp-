@@ -2,7 +2,7 @@ import { Connection, PublicKey, Transaction, clusterApiUrl } from '@solana/web3.
 import { Program, AnchorProvider, web3, BN } from '@project-serum/anchor'
 import { CreateStableCoinParams } from '@/types/stablecoin'
 
-export const PROGRAM_ID = new PublicKey('YOUR_PROGRAM_ID')
+export const PROGRAM_ID = new PublicKey('8fcF8kqLTmczkMuoYUDDvmbYjfcS7BpbxuqhEco7nv1j')
 
 // Create a connection to the devnet cluster
 const connection = new Connection(clusterApiUrl('devnet'), 'confirmed')
@@ -47,7 +47,7 @@ export async function createStableCoin(
 
     await connection.confirmTransaction(tx, 'confirmed')
     return stablecoinPDA.toString()
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error creating stablecoin:', error)
     throw new SolanaError(error.message)
   }
@@ -81,7 +81,7 @@ export async function mintStableCoin(
       .rpc()
 
     await connection.confirmTransaction(tx, 'confirmed')
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error minting stablecoin:', error)
     throw new SolanaError(error.message)
   }
@@ -115,7 +115,7 @@ export async function redeemStableCoin(
       .rpc()
 
     await connection.confirmTransaction(tx, 'confirmed')
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error redeeming stablecoin:', error)
     throw new SolanaError(error.message)
   }

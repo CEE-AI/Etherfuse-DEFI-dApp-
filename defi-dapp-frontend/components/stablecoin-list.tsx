@@ -5,6 +5,7 @@ import { useConnection } from '@solana/wallet-adapter-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { StableCoin } from '@/types/stablecoin'
 import Image from 'next/image'
+import { PROGRAM_ID } from '@/utils/solana';
 
 export function StablecoinList() {
   const { connection } = useConnection()
@@ -22,7 +23,7 @@ export function StablecoinList() {
           // ... parse other fields
         }
       })
-      setStablecoins(coins)
+      setStablecoins(coins as StableCoin[])
       setIsLoading(false)
     }
 
