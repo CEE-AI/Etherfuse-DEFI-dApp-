@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { useToast } from '@/components/ui/use-toast'
+import { useToast } from '@/hooks/use-toast'
 import { StableCoin } from '@/types/stablecoin'
 import { mintStableCoin, redeemStableCoin } from '@/utils/solana'
 import Image from 'next/image'
@@ -40,13 +40,13 @@ export default function StablecoinDetail() {
     if (!wallet.connected || !amount) return
     setIsLoading(true)
     try {
-      await mintStableCoin(connection, wallet, params.address, parseFloat(amount))
+      await mintStableCoin( wallet, params.address.toString(), parseFloat(amount))
       toast({
         title: 'Successfully minted tokens',
         description: `${amount} ${stablecoin?.symbol} minted`
       })
       setAmount('')
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: 'Error minting tokens',
         description: error.message,
@@ -61,13 +61,13 @@ export default function StablecoinDetail() {
     if (!wallet.connected || !amount) return
     setIsLoading(true)
     try {
-      await redeemStableCoin(connection, wallet, params.address, parseFloat(amount))
+      await redeemStableCoin(wallet, params.address.toString(), parseFloat(amount))
       toast({
         title: 'Successfully redeemed tokens',
         description: `${amount} ${stablecoin?.symbol} redeemed`
       })
       setAmount('')
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: 'Error redeeming tokens',
         description: error.message,
